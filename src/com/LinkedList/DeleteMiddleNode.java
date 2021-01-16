@@ -1,5 +1,7 @@
 package com.LinkedList;
 
+import com.Node;
+
 public class DeleteMiddleNode {
     //2.3 delete middle node (given middle node)
     static void removeMiddle(Node middle){

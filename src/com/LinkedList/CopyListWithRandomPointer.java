@@ -2,6 +2,8 @@ package com.LinkedList;
 
 //Leetcode 138
 
+import com.Node;
+
 import java.util.HashMap;
 
 public class CopyListWithRandomPointer {

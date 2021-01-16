@@ -1,5 +1,7 @@
 package com.LinkedList;
 
+import com.Node;
+
 public class IsPalindrome {
 
     //2.6 find palindrom recursive

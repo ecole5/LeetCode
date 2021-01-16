@@ -1,5 +1,7 @@
 package com.LinkedList;
 
+import com.Node;
+
 import java.util.HashSet;
 
 public class FindDup {

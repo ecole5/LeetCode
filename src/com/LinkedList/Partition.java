@@ -1,5 +1,7 @@
 package com.LinkedList;
 
+import com.Node;
+
 public class Partition {
     public static Node partition(Node node, int x){
         Node head = node;

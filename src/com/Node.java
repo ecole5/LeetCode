@@ -1,10 +1,10 @@
-package com.LinkedList;
+package com;
 
 public class Node {
-    int val;
-    Node next;
-    Node random;
-    Node prev;
+    public int val;
+    public Node next;
+    public Node random;
+    public Node prev;
 
     public Node(int val) {
         this.val = val;
