@@ -1,15 +1,13 @@
 package com.trees;
 
+import com.TreeNode;
+
 public class PathsWithSum {
 
-    class Node {
-        Node left;
-        Node right;
-        int data;
-    }
+
 
     //returns number of paths that sum to given value
-    public int pathSum(int givenValue, Node head){
+    public int pathSum(int givenValue, TreeNode head){
         return pathSum(givenValue,0,head);
     }
 
@@ -17,12 +15,12 @@ public class PathsWithSum {
     //O(n) time since every element is touched
     //n is size of
 
-    private int pathSum (int givenValue, int totalSum, Node n){
+    private int pathSum (int givenValue, int totalSum, TreeNode n){
         if (n == null){ //base case is when we go past leaf
          return 0;
         }
         else{
-            int sumSoFar = n.data+totalSum;
+            int sumSoFar = n.val+totalSum;
             //count paths in left subtree
             int leftSum = pathSum(givenValue,sumSoFar, n.left );
             //count paths in right subtree
