@@ -21,6 +21,8 @@ public class PathsWithSum {
         }
         else{
             int sumSoFar = n.val+totalSum;
+
+
             //count paths in left subtree
             int leftSum = pathSum(givenValue,sumSoFar, n.left );
             //count paths in right subtree
