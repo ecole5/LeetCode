@@ -2,7 +2,7 @@ package TwoPointer;
 
 import java.util.HashMap;
 
-public class SubarraySum {
+public class SubarraySumIndex {
 
 
     //O(n) space and time

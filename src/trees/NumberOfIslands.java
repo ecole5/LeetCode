@@ -21,11 +21,11 @@ public class NumberOfIslands {
 
 
     }
-    public int numIslands(char[][] grid) {
+    public int numIslands(char[][]             for (int n = 0; n < grid[m].length; n++){
+        grid) {
         int total = 0;
 
         for (int m = 0; m < grid.length; m++){
-            for (int n = 0; n < grid[m].length; n++){
 
                 if (grid[m][n] == '1'){ //is land which means not seen or water
 
