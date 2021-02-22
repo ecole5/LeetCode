@@ -1,31 +1,48 @@
 package strings;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+
+//1207
 public class MostCommonWord {
 
-    private class Entry implements Comparable<Entry> {
-
-        private String key;
-        private int value;
-
-
-
-
-
     public String mostCommonWord(String paragraph, String[] banned) {
-        PriorityQueue<Entry> maxHeap = new PriorityQueue<>(); //this is a min heap so reverse compare method to make max heap
+        //First clean up string so that there are no lower case, or punctiation, and seperate into words
+        String[] justWords = paragraph.toLowerCase().split("[^a-zA-Z]+"); //For some reason * does not work and splits up everything
 
-        String [] words = paragraph.replaceAll("[^a-zA-Z ]", "").toLowerCase().split(" ");
+        //Create freqency map
+        HashMap<String, Integer> counts = new HashMap<>();
 
-        for (String w : words){
-            if (maxHeap.contains())
+        for (String word : justWords) {
+            counts.put(word, counts.getOrDefault(word, 0) + 1);
         }
 
+        Map.Entry<String, Integer> maxEntry = null;
 
-    }
+        //Do ban check when counting frqency -> that way it is really unique words * banned runtime
+        for (Map.Entry<String, Integer> count : counts.entrySet()) {
+
+
+            boolean notBanned = true;
+            for (String badWord : banned) {
+                if (count.getKey().equals(badWord)) {
+                    notBanned = false;
+                    break;
+                }
+            }
+            if (maxEntry == null || (notBanned && count.getValue() > maxEntry.getValue())) {
+                maxEntry = count;
+            }
+
+        }
+
+        return maxEntry.getKey();
+
+
+}
 
 
 }
