@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class rotateArrayTest {
 
@@ -12,7 +12,7 @@ class rotateArrayTest {
 
     @BeforeEach
     void setUp() {
-      rotateArray test = new rotateArray();
+        rotateArray test = new rotateArray();
     }
 
     @Test
