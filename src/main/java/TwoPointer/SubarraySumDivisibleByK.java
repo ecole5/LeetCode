@@ -1,7 +1,5 @@
 package TwoPointer;
 
-import java.util.HashMap;
-
 public class SubarraySumDivisibleByK {
 
     public int subarraysDivByK(int[] A, int K) {

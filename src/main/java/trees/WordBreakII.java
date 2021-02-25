@@ -1,9 +1,9 @@
 package trees;
 
-import java.util.HashMap;
 import java.util.List;
 
-public class WordBreak {
+public class WordBreakII {
+
     public boolean wordBreak(String s, List<String> wordDict) {
         return wbHelper(s,0,wordDict, new Boolean [s.length()]);
 
@@ -28,8 +28,4 @@ public class WordBreak {
         }
         return memo[startUnchosen] = false;
     }
-
-
-
-
 }

@@ -1,7 +1,6 @@
 package trees;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CombinationSum {
@@ -32,7 +31,7 @@ public class CombinationSum {
         //Now go through all possible candidates to add
         for (int i = startPoint; i < candidates.length; i++) {
             chosen.add(candidates[i]);
-            cbHelper(candidates, remaining-candidates[i], chosen, i);
+            cbHelper(candidates, remaining-candidates[i], chosen, i); //prune backwards branches
             chosen.remove(chosen.size()-1);
 
 
