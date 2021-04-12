@@ -2,11 +2,12 @@ package LinkedList;
 
 import helper.ListNode;
 
+
 //Reverse a sublist of a linked list and return head. Do it in one pass.
 //Recussive solution is really 2n (up and down)
 public class ReverseLinkedListII {
 
-    public ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseBetweenItterative(ListNode head, int m, int n) {
 
 
         //Need dummyhead in case we need to change entire sublsit
@@ -36,4 +37,68 @@ public class ReverseLinkedListII {
 
         return dummyHead.next;
     }
+
+
+
+
+
+//General technique is to cut out and put back.
+
+//Important to use a dummy head
+//If we are allowed to change elements it might be easier simply to shift data
+
+
+
+        public ListNode reverseBetweenRecursive(ListNode head, int m, int n) {
+
+            //List can not be size 1
+            if (m == n){
+                return head;
+            }
+            ListNode beforeSegment = new ListNode();
+            ListNode startOfReverse = null; //set to segment
+
+
+            ListNode runner = head;
+            int position = 1;
+            while (runner != null){
+                if (position == m-1){
+                    beforeSegment = runner;
+                }
+                if (position == m){
+                    startOfReverse = runner;
+                }
+
+                if (position == n){
+
+                    ListNode afterSegment = runner.next;
+                    runner.next = null; //leetcode complains about loop detection if we dont use null
+                    //cut end
+
+
+                    beforeSegment.next = reverse(startOfReverse); //combine start wityh reversed end
+                    startOfReverse.next = afterSegment; //start of reverse is now tail of reverse, recombine with rest of list
+                    break;
+                }
+                runner = runner.next;
+                position++;
+            }
+
+            return m == 1 ? beforeSegment.next : head;
+
+
+
+        }
+
+        private ListNode reverse (ListNode current){
+            if (current.next == null){
+                return current;
+            }
+            ListNode end = reverse(current.next);
+
+            current.next.next = current;
+
+            return end;
+
+        }
 }

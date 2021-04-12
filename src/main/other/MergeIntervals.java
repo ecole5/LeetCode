@@ -1,46 +1,36 @@
 package other;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class MergeIntervals {
 
-    public static void main(String args[]){
-        MergeIntervals run = new MergeIntervals();
-        int[][] tmp = {{1,3},{2,6},{8,10},{15,18}};
-        run.merge(tmp);
-    }
+
     public int[][] merge(int[][] intervals) {
-        ArrayList <int[]> result = new ArrayList<>();
+
+        ArrayList<int[]> resultList = new ArrayList<>();
+        Arrays.sort(intervals, (int[] a, int[] b) -> a[0] - b[0]);
+
 
         for (int i = 0; i < intervals.length-1; i++){
-            int startA = intervals[i][0];
-            int endA = intervals[i][1];
-            int startB = intervals[i+1][0];
-            int endB = intervals[i+1][1];
-          if (startA <= startB && endA >= startB){
-              merge(i+1, intervals, startA, Math.max(endA,endB));
-          }
-          else if (startA > startB && endB >= startA){
-              merge(i+1, intervals, startB, Math.max(endA,endB));
-          }
-          else{
-              result.add(intervals[i]);
-          }
+            int [] x = intervals[i];
+            int [] y = intervals[i+1];
+
+            if (y[0] <= x[1]){ //y1 <= x2 they overlap
+                intervals[i+1] = new int[]{Math.min(x[0],y[0]),Math.max(x[1],y[1])};
+            }
+            else{
+                resultList.add(x);
+            }
         }
-        result.add(intervals[intervals.length-1]);
-        int[][] tmp = new int[result.size()][2];
-        int i = 0;
-        for (int[] t : result){
-            tmp[i++] = t;
-        }
-        return tmp;
+
+        //Postprocessing: merge the last interval
+        resultList.add(intervals[intervals.length-1]);
+
+
+        return resultList.toArray(new int[resultList.size()][]);
+
     }
 
-    private void merge (int indexOfB, int[][] intervals, int start, int end){
-        //Copy merge to B position
-        intervals[indexOfB][0] = start;
-        intervals[indexOfB][1] = end;
-    }
 
 
 }
