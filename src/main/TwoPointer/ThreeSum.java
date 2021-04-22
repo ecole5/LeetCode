@@ -48,6 +48,52 @@ public class ThreeSum {
 
     }
 
+    public List<List<Integer>> threeSumHashNoSort(int[] nums) {
+
+      HashSet<List<Integer>> results = new HashSet<>();
+
+      //Build set of numbers
+      HashMap<Integer,Integer> values = new HashMap<>();
+      for (int i : nums){
+          values.put(i, values.getOrDefault(i,0)+1);
+      }
+
+      for (int i = 0; i < nums.length; i++){
+          int firstSelected = nums[i];
+
+          if (values.containsKey(firstSelected)){
+              values.put(firstSelected,values.get(firstSelected)-1);
+          }
+
+          for (int j = i+1; j < nums.length; j++){
+              int secondSelected = nums[j];
+
+
+
+              int thirdNeeded = (firstSelected+secondSelected)*-1;
+
+
+              //try to add results
+              if (values.containsKey(thirdNeeded) && values.get(thirdNeeded) > (secondSelected== thirdNeeded ? 1 : 0)){
+                  List <Integer> tmp = Arrays.asList(firstSelected,secondSelected,thirdNeeded);
+                  Collections.sort(tmp);
+                  results.add(tmp);
+              }
+
+
+          }
+
+          if (values.containsKey(firstSelected)){
+              values.put(firstSelected,values.get(firstSelected)+1);
+          }
+
+
+      }
+
+        return new ArrayList<>(results);
+
+    }
+
 
 
 

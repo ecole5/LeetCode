@@ -4,38 +4,39 @@ package LinkedList;
 
 import helper.Node;
 
+
 import java.util.HashMap;
+
 
 public class CopyListWithRandomPointer {
 
     public Node copyRandomList(Node head) {
-
-        if (head == null){
+        if (head == null) {
             return null;
         }
 
-        Node originalHead = head;
-        HashMap<Node, Node> map = new HashMap<>();
-        Node preHead = new Node(0);
-        Node oneBeforeNewHead = preHead;
+
+       HashMap<Node,Node> oldNewMap = new HashMap<>();
+        Node newList = newList(head,oldNewMap);
 
         while (head != null){
-            preHead .next = new Node(head.val);
-            map.put(head,preHead.next);
+            Node newRandom = oldNewMap.get(head.random);
+            Node newnode = oldNewMap.get(head);
+            newnode.random = newRandom;
             head = head.next;
-            preHead = preHead.next;
+
         }
 
-        head = originalHead;
-        preHead = oneBeforeNewHead.next;
-        while (head != null){
-            preHead.random = map.get(head.random);
-            head = head.next;
-            preHead = preHead.next;
-        }
+        return newList;
 
-        return oneBeforeNewHead.next;
+    }
 
+    public Node newList (Node head, HashMap<Node, Node> oldnewMapping){
+        if (head == null){
+            return null;
+            }
+        oldnewMapping.put(head,new Node(head.val,newList(head.next,oldnewMapping)));
+        return oldnewMapping.get(head);
     }
 
 

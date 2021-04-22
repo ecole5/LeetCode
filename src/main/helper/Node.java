@@ -12,6 +12,14 @@ public class Node {
         this.random = null;
         this.prev = null;
     }
+    public Node(int val,Node next) {
+        this.val = val;
+        this.next = next;
+        this.random = null;
+        this.prev = null;
+
+    }
+
 
 
 }
