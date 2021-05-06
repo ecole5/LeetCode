@@ -14,12 +14,34 @@ public class WordLadderII {
 
         Map<String, List<String>> paths = bfsPaths(beginWord, endWord, wordList);
 
-        if (paths == null){
+        if (paths.isEmpty()){
             return  shortestPaths;
         }
 
         //DFS shortest paths using paths
 
+       List<String> seenSoFar = new ArrayList<>();
+        seenSoFar.add(beginWord);
+        dfsPath(beginWord,endWord,seenSoFar,paths, shortestPaths);
+
+        return shortestPaths;
+
+
+    }
+
+
+    private void dfsPath(String currentWord, String endWord, List<String> wordSoFar,  Map<String, List<String>> paths, List<List<String>> shortestPaths){
+        if (currentWord.equals(endWord)){
+            List<String> tmp = new ArrayList<>(wordSoFar);
+            shortestPaths.add(tmp);
+            return;
+        }
+
+        for (String child: paths.get(currentWord)){
+            wordSoFar.add(child);
+            dfsPath(child,endWord,wordSoFar,paths,shortestPaths);
+            wordSoFar.remove(wordSoFar.size()-1);
+        }
 
     }
 
@@ -50,6 +72,8 @@ public class WordLadderII {
         Deque<String> queue = new ArrayDeque<>();
 
         Set<String> marked = new HashSet<>();
+        marked.add(beginWord);
+
         Map<String, List<String>> paths = new HashMap<>();
 
         queue.add(beginWord);
@@ -60,6 +84,11 @@ public class WordLadderII {
 
 
             String word = queue.poll();
+
+            if (word.equals(endWord)){
+                return paths;
+            }
+
             paths.put(word, new ArrayList<>());
 
             for (int i = 0; i < L; i++) {
@@ -68,15 +97,19 @@ public class WordLadderII {
 
                 if (children != null) {
                     for (String child : children) {
-                        if (!marked.contains(child)) {
-                            if (child.equals(endWord)) {
-                                return paths;
-                            }
+                        paths.get(word).add(child); //add child to parent list even if seen
+
+                        if (marked.contains(child)){
+                            continue;
+                        }
+
+                            paths.get(word).add(child); //add child to parent list even if seen
+
 
                             queue.add(child);
                             marked.add(child);
 
-                        }
+
 
                     }
                 }
@@ -87,7 +120,7 @@ public class WordLadderII {
 
         }
 
-        return null;
+        return paths;
 
     }
 }
